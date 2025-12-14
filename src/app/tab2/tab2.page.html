@@ -1,7 +1,7 @@
 <ion-header [translucent]="true">
   <ion-toolbar>
     <ion-title>
-      Tab 2
+      Crear Tarea
     </ion-title>
   </ion-toolbar>
 </ion-header>
@@ -9,9 +9,37 @@
 <ion-content [fullscreen]="true">
   <ion-header collapse="condense">
     <ion-toolbar>
-      <ion-title size="large">Tab 2</ion-title>
+      <ion-title size="large">Crear Tarea</ion-title>
     </ion-toolbar>
   </ion-header>
 
-  <app-explore-container name="Tab 2 page"></app-explore-container>
+  <form [formGroup]="taskForm" (ngSubmit)="onSubmit()">
+    <ion-item>
+      <ion-label position="stacked">Título *</ion-label>
+      <ion-input formControlName="title" placeholder="Ingrese el título de la tarea"></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-label position="stacked">Descripción</ion-label>
+      <ion-textarea formControlName="description" placeholder="Ingrese la descripción (opcional)"></ion-textarea>
+    </ion-item>
+
+    <ion-item>
+      <ion-label position="stacked">Tipo *</ion-label>
+      <ion-select formControlName="typeId" placeholder="Seleccione el tipo">
+        <ion-select-option *ngFor="let type of taskTypes" [value]="type.id">{{ type.name }}</ion-select-option>
+      </ion-select>
+    </ion-item>
+
+    <ion-button expand="block" type="submit" [disabled]="!taskForm.valid" style="margin: 16px;">
+      Crear Tarea
+    </ion-button>
+  </form>
+
+  <ion-toast
+    [isOpen]="showToast"
+    [message]="toastMessage"
+    duration="2000"
+    (didDismiss)="showToast = false">
+  </ion-toast>
 </ion-content>
