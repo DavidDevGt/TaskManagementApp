@@ -133,7 +133,3 @@ Este proyecto está bajo la Licencia MIT. Ver el archivo `LICENSE` para más det
 ## Soporte
 
 Para soporte técnico o preguntas, por favor contacta al equipo de desarrollo o abre un issue en el repositorio.
-
----
-
-Desarrollado por [Tu Nombre/Equipo] - Arquitectura inspirada en mejores prácticas de Microsoft y el ecosistema Angular/Ionic.
