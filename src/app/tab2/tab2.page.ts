@@ -1,11 +1,9 @@
 import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ReactiveFormsModule, FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { IonicModule } from '@ionic/angular';
+import { IonHeader, IonToolbar, IonTitle, IonButtons, IonButton, IonIcon, IonContent, IonCard, IonCardHeader, IonCardSubtitle, IonCardContent, IonList, IonItem, IonInput, IonNote, IonSelect, IonSelectOption, IonTextarea, IonToast } from '@ionic/angular/standalone';
 import { TaskService } from '../services/task.service';
 import { CustomTaskType } from '../models/task-type.model';
-import { addIcons } from 'ionicons';
-import { refreshOutline, documentTextOutline, bookmarkOutline, chatboxOutline, addCircleOutline } from 'ionicons/icons';
 
 @Component({
   selector: 'app-tab2',
@@ -14,7 +12,25 @@ import { refreshOutline, documentTextOutline, bookmarkOutline, chatboxOutline, a
   standalone: true,
   changeDetection: ChangeDetectionStrategy.OnPush,
   imports: [
-    IonicModule,
+    IonHeader,
+    IonToolbar,
+    IonTitle,
+    IonButtons,
+    IonButton,
+    IonIcon,
+    IonContent,
+    IonCard,
+    IonCardHeader,
+    IonCardSubtitle,
+    IonCardContent,
+    IonList,
+    IonItem,
+    IonInput,
+    IonNote,
+    IonSelect,
+    IonSelectOption,
+    IonTextarea,
+    IonToast,
     CommonModule,
     ReactiveFormsModule
   ],
@@ -26,7 +42,6 @@ export class Tab2Page implements OnInit {
   toastMessage = '';
 
   constructor(private fb: FormBuilder, private taskService: TaskService) {
-    addIcons({ refreshOutline, documentTextOutline, bookmarkOutline, chatboxOutline, addCircleOutline });
     this.taskForm = this.fb.group({
       title: ['', [Validators.required, Validators.maxLength(100)]],
       description: ['', Validators.maxLength(500)],

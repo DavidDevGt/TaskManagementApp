@@ -1,5 +1,5 @@
 import { Component, OnInit, OnDestroy, signal, ChangeDetectionStrategy } from '@angular/core';
-import { IonicModule } from '@ionic/angular';
+import { IonHeader, IonToolbar, IonTitle, IonButtons, IonButton, IonIcon, IonContent, IonGrid, IonRow, IonCol, IonCard, IonCardHeader, IonCardTitle, IonCardContent, IonProgressBar, IonCardSubtitle } from '@ionic/angular/standalone';
 import { CommonModule } from '@angular/common';
 import { TaskService } from '../services/task.service';
 import { Task } from '../models/task.model';
@@ -12,7 +12,22 @@ import { Subscription } from 'rxjs';
   standalone: true,
   changeDetection: ChangeDetectionStrategy.OnPush,
   imports: [
-    IonicModule,
+    IonHeader,
+    IonToolbar,
+    IonTitle,
+    IonButtons,
+    IonButton,
+    IonIcon,
+    IonContent,
+    IonGrid,
+    IonRow,
+    IonCol,
+    IonCard,
+    IonCardHeader,
+    IonCardTitle,
+    IonCardContent,
+    IonProgressBar,
+    IonCardSubtitle,
     CommonModule
   ],
 })

@@ -1,10 +1,8 @@
-import { Component, ChangeDetectionStrategy, ViewChild } from '@angular/core';
+import { Component, ChangeDetectionStrategy, ViewChild, AfterViewInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { IonicModule, IonContent, ViewWillEnter } from '@ionic/angular';
+import { IonHeader, IonToolbar, IonTitle, IonButtons, IonButton, IonIcon, IonContent, IonList, IonItemSliding, IonItemOptions, IonItemOption, IonItem, IonLabel, IonBadge, ViewWillEnter } from '@ionic/angular/standalone';
 import { TaskService } from '../services/task.service';
 import { Task } from '../models/task.model';
-import { addIcons } from 'ionicons';
-import { checkmark, trash, checkmarkCircle, ellipseOutline, checkboxOutline, squareOutline } from 'ionicons/icons';
 import { Observable } from 'rxjs';
 
 @Component({
@@ -14,22 +12,37 @@ import { Observable } from 'rxjs';
   standalone: true,
   changeDetection: ChangeDetectionStrategy.OnPush,
   imports: [
-    IonicModule,
+    IonHeader,
+    IonToolbar,
+    IonTitle,
+    IonButtons,
+    IonButton,
+    IonIcon,
+    IonContent,
+    IonList,
+    IonItemSliding,
+    IonItemOptions,
+    IonItemOption,
+    IonItem,
+    IonLabel,
+    IonBadge,
     CommonModule
   ],
 })
-export class Tab3Page implements ViewWillEnter {
+export class Tab3Page implements ViewWillEnter, AfterViewInit {
   @ViewChild(IonContent) content!: IonContent;
   tasks$: Observable<Task[]> = this.taskService.tasks$;
 
-  constructor(private taskService: TaskService) {
-    addIcons({ checkmark, trash, checkmarkCircle, ellipseOutline, checkboxOutline, squareOutline });
-  }
+  constructor(private taskService: TaskService) {}
 
-  ionViewWillEnter() {
+  ngAfterViewInit() {
     if (this.content) {
       this.content.scrollToTop(0);
     }
+  }
+
+  ionViewWillEnter() {
+    // Scroll is now handled in ngAfterViewInit
   }
 
   openFilterModal() {

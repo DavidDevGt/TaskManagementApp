@@ -8,7 +8,7 @@
 </ion-header>
 
 <ion-content [fullscreen]="true" #content>
-    <ion-list>
+    <ion-list *ngIf="(tasks$ | async)?.length; else emptyState">
         <ion-item-sliding *ngFor="let task of tasks$ | async; trackBy: trackByTask">
 
             <ion-item-options side="start">
@@ -48,6 +48,14 @@
             </ion-item-options>
             
         </ion-item-sliding>
-        
+
         </ion-list>
+
+    <ng-template #emptyState>
+        <div class="ion-padding ion-text-center">
+            <ion-icon name="document-text-outline" size="large" color="medium"></ion-icon>
+            <h3>No hay tareas aún</h3>
+            <p color="medium">Crea tu primera tarea en la pestaña "Nueva Tarea"</p>
+        </div>
+    </ng-template>
 </ion-content>
