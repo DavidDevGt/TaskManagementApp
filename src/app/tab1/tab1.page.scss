@@ -1,0 +1,16 @@
+.metric-number {
+    font-size: 3em;
+    font-weight: 700;
+    margin: 0;
+    line-height: 1.2;
+}
+
+.dashboard-widget ion-card-header {
+    color: var(--ion-color-light, #ffffff);
+    padding-bottom: 0;
+}
+
+ion-progress-bar {
+    height: 15px;
+    border-radius: 8px;
+}

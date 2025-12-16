@@ -1,5 +1,6 @@
-import { Component, OnInit, OnDestroy, signal } from '@angular/core';
-import { IonHeader, IonToolbar, IonTitle, IonContent, IonCard, IonCardHeader, IonCardTitle, IonCardContent } from '@ionic/angular/standalone';
+import { Component, OnInit, OnDestroy, signal, ChangeDetectionStrategy } from '@angular/core';
+import { IonicModule } from '@ionic/angular';
+import { CommonModule } from '@angular/common';
 import { TaskService } from '../services/task.service';
 import { Task } from '../models/task.model';
 import { Subscription } from 'rxjs';
@@ -8,7 +9,12 @@ import { Subscription } from 'rxjs';
   selector: 'app-tab1',
   templateUrl: 'tab1.page.html',
   styleUrls: ['tab1.page.scss'],
-  imports: [IonHeader, IonToolbar, IonTitle, IonContent, IonCard, IonCardHeader, IonCardTitle, IonCardContent],
+  standalone: true,
+  changeDetection: ChangeDetectionStrategy.OnPush,
+  imports: [
+    IonicModule,
+    CommonModule
+  ],
 })
 export class Tab1Page implements OnInit, OnDestroy {
   pendingTasks = signal(0);
@@ -26,5 +32,21 @@ export class Tab1Page implements OnInit, OnDestroy {
 
   ngOnDestroy() {
     this.subscription.unsubscribe();
+  }
+
+  refreshData() {
+    // Recargar datos del servicio
+    this.taskService.getTasks().then(tasks => {
+      // Actualizar señales si es necesario
+    });
+  }
+
+  completionPercentage(): number {
+    const total = this.pendingTasks() + this.completedTasks();
+    return total > 0 ? Math.round((this.completedTasks() / total) * 100) : 0;
+  }
+
+  totalTasks(): number {
+    return this.pendingTasks() + this.completedTasks();
   }
 }

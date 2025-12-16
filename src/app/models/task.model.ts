@@ -7,4 +7,5 @@ export interface Task {
     typeId: string;
     completed: boolean;
     createdAt: number;
+    typeName: string;
 }

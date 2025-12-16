@@ -1,8 +1,11 @@
 <ion-header [translucent]="true">
-  <ion-toolbar>
-    <ion-title>
-      Crear Tarea
-    </ion-title>
+  <ion-toolbar color="secondary">
+    <ion-title>Nueva Tarea</ion-title>
+    <ion-buttons slot="end">
+      <ion-button (click)="resetForm()" color="light">
+        <ion-icon slot="icon-only" name="refresh-outline" aria-label="Reiniciar formulario"></ion-icon>
+      </ion-button>
+    </ion-buttons>
   </ion-toolbar>
 </ion-header>
 
@@ -13,28 +16,72 @@
     </ion-toolbar>
   </ion-header>
 
-  <form [formGroup]="taskForm" (ngSubmit)="onSubmit()">
-    <ion-item>
-      <ion-label position="stacked">Título *</ion-label>
-      <ion-input formControlName="title" placeholder="Ingrese el título de la tarea"></ion-input>
-    </ion-item>
+  <ion-card class="ion-margin">
+    <ion-card-header>
+      <ion-card-subtitle>Completa los detalles de la nueva actividad.</ion-card-subtitle>
+    </ion-card-header>
+    
+    <ion-card-content>
+      <form [formGroup]="taskForm" (ngSubmit)="onSubmit()">
 
-    <ion-item>
-      <ion-label position="stacked">Descripción</ion-label>
-      <ion-textarea formControlName="description" placeholder="Ingrese la descripción (opcional)"></ion-textarea>
-    </ion-item>
+        <ion-list lines="none">
+          
+          <ion-item class="ion-margin-vertical">
+            <ion-icon slot="start" name="document-text-outline" color="secondary"></ion-icon>
+            <ion-input 
+              formControlName="title" 
+              label="Título" 
+              labelPlacement="floating" 
+              placeholder="Escribe un título descriptivo"
+              required>
+            </ion-input>
+            <ion-note slot="helper" color="danger" *ngIf="taskForm.get('title')?.invalid && taskForm.get('title')?.touched">
+              El título es obligatorio.
+            </ion-note>
+          </ion-item>
 
-    <ion-item>
-      <ion-label position="stacked">Tipo *</ion-label>
-      <ion-select formControlName="typeId" placeholder="Seleccione el tipo">
-        <ion-select-option *ngFor="let type of taskTypes" [value]="type.id">{{ type.name }}</ion-select-option>
-      </ion-select>
-    </ion-item>
+          <ion-item class="ion-margin-vertical">
+            <ion-icon slot="start" name="bookmark-outline" color="secondary"></ion-icon>
+            <ion-select 
+              formControlName="typeId" 
+              label="Tipo" 
+              labelPlacement="floating" 
+              interface="popover" 
+              placeholder="Selecciona la categoría"
+              required>
+              <ion-select-option *ngFor="let type of taskTypes; trackBy: trackByType" [value]="type.id">{{ type.name }}</ion-select-option>
+            </ion-select>
+            <ion-note slot="helper" color="danger" *ngIf="taskForm.get('typeId')?.invalid && taskForm.get('typeId')?.touched">
+              Debes seleccionar un tipo.
+            </ion-note>
+          </ion-item>
 
-    <ion-button expand="block" type="submit" [disabled]="!taskForm.valid" style="margin: 16px;">
-      Crear Tarea
-    </ion-button>
-  </form>
+          <ion-item class="ion-margin-vertical">
+            <ion-icon slot="start" name="chatbox-outline" color="secondary"></ion-icon>
+            <ion-textarea 
+              formControlName="description" 
+              label="Descripción" 
+              labelPlacement="floating" 
+              placeholder="Detalles adicionales (opcional)" 
+              [autoGrow]="true"
+              rows="3">
+            </ion-textarea>
+          </ion-item>
+        </ion-list>
+        
+        <ion-button 
+          expand="block" 
+          type="submit" 
+          [disabled]="!taskForm.valid" 
+          class="ion-margin-top" 
+          color="success">
+          <ion-icon slot="start" name="add-circle-outline"></ion-icon>
+          Crear Tarea
+        </ion-button>
+
+      </form>
+    </ion-card-content>
+  </ion-card>
 
   <ion-toast
     [isOpen]="showToast"
